@@ -5,11 +5,9 @@ import { SuperCremeux } from '../../common/models'
 const Cart = () => {
   const store = useStore()
   const [list, setList] = useState(store.getState().list)
-  const price = list.map(item => item.price)
-  const initialValue = 0
-  const totalPrice = price.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    initialValue,
+  const totalOrder = list.reduce(
+    (prv, cur) => cur.price + prv,
+    0,
   );
 
   useEffect(() => {
@@ -24,7 +22,7 @@ const Cart = () => {
           return <span key={index} className='SelectedProduct'>{item.title} {item.price}</span>
         })
       }
-      <p className='TotalCommand'>{list < 0 ? 'Aucun produit sélectionné pour le moment' : `Total commande ${totalPrice} euros`}</p>
+      <div>{list.length === 0 ? 'Aucun produit sélectionné pour le moment' : `Total commande ${totalOrder} euros`}</div>
       <div className='CartNavBar'>
         <button onClick={() => store.dispatch({type: 'ADD_PRODUCT', payload: SuperCremeux})}>Ajouter un super crémeux</button>
       </div>
