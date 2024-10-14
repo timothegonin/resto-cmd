@@ -4,10 +4,7 @@ import { PouletCroquant, SuperCremeux } from "../common/models";
 
 let state = {
   value: null,
-  list: [
-    SuperCremeux,
-    PouletCroquant,
-  ]
+  list: []
 };
 
 const reducer = (currentState, action ) => {
