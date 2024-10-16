@@ -3,7 +3,7 @@ export const DoubleCantal = {
   price: 15.99,
 }
 export const SuperCremeux = {
-  title: "Super Cremeux",
+  title: "Super Crémeux",
   price: 14.99,
 }
 export const PouletCroquant = {
