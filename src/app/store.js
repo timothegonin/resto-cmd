@@ -9,13 +9,18 @@ let state = {
   list: []
 };
 
-export const store = configureStore(
-  {
+export const store = configureStore({
     preloadedState: state,
     reducer: combineReducers({
-      list: cartSlice.reducer,
       owner: ownerSlice.reducer,
-      notes: notesSlice.reducer
-    })
-  }
-)
+      list: cartSlice.reducer,
+      notes: notesSlice.reducer,
+    }),
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware().prepend([
+    (store) => (next) => (action) => {
+      console.log('Action', action);
+      next(action);
+    }
+  ])
+})
