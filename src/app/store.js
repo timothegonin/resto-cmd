@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { cartSlice } from "../features/cart/cartSlice";
 import { ownerSlice } from "../features/owner/ownerSlice";
 import { notesSlice } from "../features/notes/notesSlice";
+import {thunk} from 'redux-thunk'
 
 
 let state = {
@@ -21,6 +22,7 @@ export const store = configureStore({
     (store) => (next) => (action) => {
       console.log('Action', action);
       next(action);
-    }
+    },
+    thunk,
   ])
 })
