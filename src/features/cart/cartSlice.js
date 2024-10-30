@@ -2,8 +2,19 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getListQuantityProductPerName } from "../../app/selectors";
 import * as ProductList from '../../common/models';
 
+const TIME_RESET_ORDER = 5000
+
+export const resetOrderThunk = createAsyncThunk('cart/resetOrderThunk', async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject()
+    },TIME_RESET_ORDER)
+  })
+})
+
 export const addProductThunk = createAsyncThunk( 'cart/addProductThunk' , async (product, thunkApi) => {
   thunkApi.dispatch(cartSlice.actions.addProduct(product));
+  thunkApi.dispatch(resetOrderThunk());
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const state = thunkApi.getState();
@@ -47,6 +58,9 @@ export const cartSlice = createSlice({
     builder.addCase(addProductThunk.fulfilled, (state) => {
       const specialOffer = ProductList.PouletCroquant
       return [...state, {...specialOffer, price: Math.round((ProductList.PouletCroquant.price / 2) * 100) / 100}]
+    })
+    builder.addCase(resetOrderThunk.rejected, () => {
+      return []
     })
   }
 })
