@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { cartSlice } from "../features/cart/cartSlice";
 import { ownerSlice } from "../features/owner/ownerSlice";
 import { notesSlice } from "../features/notes/notesSlice";
+import {menuSlice} from '../features/menu/menuSlice'
 import {thunk} from 'redux-thunk'
 
 
@@ -16,6 +17,7 @@ export const store = configureStore({
       owner: ownerSlice.reducer,
       list: cartSlice.reducer,
       notes: notesSlice.reducer,
+      menu: menuSlice.reducer,
     }),
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware().prepend([
