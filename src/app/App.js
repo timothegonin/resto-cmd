@@ -7,6 +7,7 @@ import Total from "../features/total/Total"
 import Voucher from '../features/voucher/Voucher';
 import Owner from "../features/owner/Owner"
 import {Notes} from "../features/notes/Notes"
+import { Fidelity } from '../features/fidelity/Fidelity';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Voucher/>
         <Owner/>
         <Notes/>
+        <Fidelity/>
       </div>
     </Provider>
   );

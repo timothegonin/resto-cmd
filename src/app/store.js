@@ -4,6 +4,7 @@ import { ownerSlice } from "../features/owner/ownerSlice";
 import { notesSlice } from "../features/notes/notesSlice";
 import {menuSlice} from '../features/menu/menuSlice'
 import {thunk} from 'redux-thunk'
+import { api } from "../services/api.service";
 
 
 let state = {
@@ -18,13 +19,7 @@ export const store = configureStore({
       list: cartSlice.reducer,
       notes: notesSlice.reducer,
       menu: menuSlice.reducer,
+      [api.reducerPath]: api.reducer,
     }),
-  middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().prepend([
-    (store) => (next) => (action) => {
-      console.log('Action', action);
-      next(action);
-    },
-    thunk,
-  ])
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware).concat(thunk),
 })
